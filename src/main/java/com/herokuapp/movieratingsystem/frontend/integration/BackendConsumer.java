@@ -16,7 +16,7 @@ public class BackendConsumer extends AbstractConsumer {
     private final String backendUrl;
 
 
-    public BackendConsumer(@Value("mvr.backend.url") String backendUrl, WebClient.Builder builder) {
+    public BackendConsumer(@Value("${mvr.backend.url}") String backendUrl, WebClient.Builder builder) {
         super(builder);
         this.backendUrl = backendUrl;
     }

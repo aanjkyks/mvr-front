@@ -1,0 +1,145 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/thing.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+
+    <title th:text="${movie.name}">Movie page</title>
+</head>
+<body>
+<div class="container">
+    <br/>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm" action="#" th:action="@{/index}" method="get">
+                <div class="card-body row no-gutters align-items-center">
+                    <!--end of col-->
+                    <div class="col">
+                        <input class="form-control form-control-lg form-control-borderless" type="search"
+                               placeholder="Movie name" th:name="name">
+                    </div>
+                    <div class="col">
+                        <input class="form-control form-control-lg form-control-borderless" type="search"
+                               placeholder="Director name" th:name="dName">
+                    </div>
+                    <!--end of col-->
+                    <div class="col-auto">
+                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+                    </div>
+                    <!--end of col-->
+                </div>
+            </form>
+        </div>
+        <!--end of col-->
+    </div>
+</div>
+<form action="#" method="post" th:action="@{/movie}" th:object="${movie}" enctype="multipart/form-data">
+    <input type="hidden" id="id" th:value="${movie.id}" th:field="*{id}">
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Movie Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" th:value="${movie.name}" th:field="*{name}">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="description" th:value="${movie.description}"
+                   th:field="*{description}">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="poster" class="col-sm-2 col-form-label">Poster</label>
+        <div class="col-sm-10">
+            <input type="file" class="form-control" id="poster" th:field="*{poster}" th:value="${movie.poster}">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="director" class="col-sm-2 col-form-label">Director</label>
+        <div class="col-sm-10">
+            <select th:field="*{director}" id="director">
+                <option th:value="${movie.director}" th:text="${movie.director.name}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="actors" class="col-sm-2 col-form-label">Actors</label>
+        <div class="col-sm-10">
+            <select multiple class="form-control" id="actors">
+                <option th:each="actor: ${movie.actors}" th:text="${actor.name}" th:value="${actor}">1</option>
+            </select>
+        </div>
+    </div>
+
+    <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+</form>
+
+
+<section class="vantagens">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>Staff List</h3>
+                <div class="row row-margin-bottom mt-5">
+                    <div class="col-md-6 no-padding lib-item" data-category="view">
+                        <div class="lib-panel">
+                            <div class="row box-shadow w-100">
+                                <div class="col-md-6 image-row">
+                                    <a href="" th:href="@{'/actors/'+${movie.director.id}}">
+                                        <img th:src="@{'data:image/png;base64, '+${movie.director.photo}}" src="">
+                                    </a>
+                                </div>
+                                <div class="col-md-6 card-text">
+                                    <div class="lib-row lib-header text-left pl-5">
+                                        <span class="blue"><a href="" th:text="${movie.director.name}"
+                                                              th:href="@{'/actors/'+${movie.director.id}}">Actor name</a></span>
+                                        <div class="lib-header-seperator"></div>
+                                    </div>
+                                    <div class="lib-row lib-desc pl-5" th:text="${movie.director.role}">Actor role</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--This is an object you want-->
+                    <div th:each="actor: ${movie.actors}">
+                        <div class="col-md-6 no-padding lib-item" data-category="view">
+                            <div class="lib-panel">
+                                <div class="row box-shadow w-100">
+                                    <div class="col-md-6 image-row">
+                                        <a href="" th:href="@{'/actors/'+${actor.id}}">
+                                            <img th:src="@{'data:image/png;base64, '+${actor.photo}}" src="">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 card-text">
+                                        <div class="lib-row lib-header text-left pl-5">
+                                            <span class="blue"><a href="" th:text="${actor.name}"
+                                                                  th:href="@{'/actors/'+${actor.id}}">Actor name</a></span>
+                                            <div class="lib-header-seperator"></div>
+                                        </div>
+                                        <div class="lib-row lib-desc pl-5" th:text="${actor.role}">Actor role</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--And it ends here-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
