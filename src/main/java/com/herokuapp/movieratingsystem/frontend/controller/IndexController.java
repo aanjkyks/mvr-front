@@ -17,10 +17,11 @@ public class IndexController {
 
     @GetMapping({"", "/home", "/index", "index.hmtl"})
     public String index(Model model,
-                        @RequestParam(required = false) String search) {
+                        @RequestParam(required = false) String name,
+                        @RequestParam(required = false) String dName) {
 
-        var name = Strings.isNotBlank(search) ? search : null;
-        var dName = Strings.isNotBlank(search) ? search : null;
+        name = Strings.isNotBlank(name) ? name : null;
+        dName = Strings.isNotBlank(dName) ? dName : null;
 
         var movies = backendConsumer.findMovies(name, dName);
         model.addAttribute("movies", movies);

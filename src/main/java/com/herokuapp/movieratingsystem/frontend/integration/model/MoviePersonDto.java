@@ -7,6 +7,7 @@ public class MoviePersonDto {
     private Long movie;
     private String movieName;
     private String role;
+    private String poster;
 
     public Long getMovie() {
         return movie;
@@ -32,6 +33,15 @@ public class MoviePersonDto {
 
     public MoviePersonDto setRole(String role) {
         this.role = role;
+        return this;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public MoviePersonDto setPoster(String poster) {
+        this.poster = poster;
         return this;
     }
 

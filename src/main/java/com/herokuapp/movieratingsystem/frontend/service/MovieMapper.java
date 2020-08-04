@@ -1,9 +1,8 @@
 package com.herokuapp.movieratingsystem.frontend.service;
 
-import com.herokuapp.movieratingsystem.frontend.MovieWithFile;
+import com.herokuapp.movieratingsystem.frontend.model.MovieWithFile;
 import com.herokuapp.movieratingsystem.frontend.integration.model.MovieDto;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -20,10 +19,9 @@ public class MovieMapper {
         } catch (IOException ignored) {
         }
         return new MovieDto()
+                .setName(input.getName())
                 .setDescription(input.getDescription())
                 .setId(input.getId())
-                .setPoster(poster)
-                .setActors(input.getActors())
-                .setDirector(input.getDirector());
+                .setPoster(poster);
     }
 }

@@ -48,12 +48,30 @@
     <h3 th:text="${movie.name}">Movie</h3>
     <img th:src="@{'data:image/png;base64, '+${movie.poster}}" src="">
 </center>
+<form class="card card-sm" action="#" th:action="@{'/movie/' + ${movie.id} + '/rate'}" method="post">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="col">
+                <input type="range" class="custom-range" min="0" max="10" step="1" id="customRange2" th:name="rating">
+            </div>
+            <!--end of col-->
+            <div class="col-auto">
+                <button class="btn btn-lg btn-success" type="submit">Rate</button>
+            </div>
+            <!--end of col-->
+        </div>
+    </div>
+</form>
 <br>
 <table class="table">
     <tbody>
     <tr>
         <td>Description:</td>
-        <td th:text="${movie.description}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida tellus quis enim semper imperdiet. Proin enim turpis, placerat tristique justo vitae, hendrerit auctor nibh. Pellentesque pharetra aliquet ante in efficitur. Nunc a risus posuere, aliquam purus id, hendrerit ipsum. Sed a velit non purus porttitor malesuada sit amet eget. </td>
+        <td th:text="${movie.description}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida tellus
+            quis enim semper imperdiet. Proin enim turpis, placerat tristique justo vitae, hendrerit auctor nibh.
+            Pellentesque pharetra aliquet ante in efficitur. Nunc a risus posuere, aliquam purus id, hendrerit ipsum.
+            Sed a velit non purus porttitor malesuada sit amet eget.
+        </td>
     </tr>
     <tr>
         <td>Average Rating:</td>
@@ -68,44 +86,44 @@
 <a class="btn btn-lg btn-primary" type="button" th:href="@{'/movie/' + ${movie.id} + '/edit'}">Edit</a>
 
 
-
 <section class="vantagens">
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-12 text-center">
                 <h3>Staff List</h3>
                 <div class="row row-margin-bottom mt-5">
-                        <div class="col-md-6 no-padding lib-item" data-category="view">
-                            <div class="lib-panel">
-                                <div class="row box-shadow w-100">
-                                    <div class="col-md-6 image-row">
-                                        <a href="" th:href="@{'/actors/'+${movie.director.id}}">
-                                            <img th:src="@{'data:image/png;base64, '+${movie.director.photo}}" src="">
-                                        </a>
+                    <div class="col-md-6 no-padding lib-item" data-category="view">
+                        <div class="lib-panel">
+                            <div class="row box-shadow w-100">
+                                <div class="col-md-6 image-row">
+                                    <a href="" th:href="@{'/person/'+${movie.director.id}}">
+                                        <img th:src="@{'data:image/png;base64, '+${movie.director.photo}}" src="">
+                                    </a>
+                                </div>
+                                <div class="col-md-6 card-text">
+                                    <div class="lib-row lib-header text-left pl-5">
+                                        <span class="blue"><a href="" th:text="${movie.director.name}"
+                                                              th:href="@{'/person/'+${movie.director.id}}">Actor name</a></span>
+                                        <div class="lib-header-seperator"></div>
                                     </div>
-                                    <div class="col-md-6 card-text">
-                                        <div class="lib-row lib-header text-left pl-5">
-                                            <span class="blue"><a href="" th:text="${movie.director.name}" th:href="@{'/actors/'+${movie.director.id}}">Actor name</a></span>
-                                            <div class="lib-header-seperator"></div>
-                                        </div>
-                                        <div class="lib-row lib-desc pl-5" th:text="${movie.director.role}">Actor role</div>
-                                    </div>
+                                    <div class="lib-row lib-desc pl-5" th:text="${movie.director.role}">Actor role</div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     <!--This is an object you want-->
-                    <div th:each="actor: ${movie.actors}">
-                        <div class="col-md-6 no-padding lib-item" data-category="view">
+                        <div class="col-md-6 no-padding lib-item" data-category="view" th:each="actor: ${movie.actors}">
                             <div class="lib-panel">
                                 <div class="row box-shadow w-100">
                                     <div class="col-md-6 image-row">
-                                        <a href="" th:href="@{'/actors/'+${actor.id}}">
+                                        <a href="" th:href="@{'/person/'+${actor.id}}">
                                             <img th:src="@{'data:image/png;base64, '+${actor.photo}}" src="">
                                         </a>
                                     </div>
                                     <div class="col-md-6 card-text">
                                         <div class="lib-row lib-header text-left pl-5">
-                                            <span class="blue"><a href="" th:text="${actor.name}" th:href="@{'/actors/'+${actor.id}}">Actor name</a></span>
+                                            <span class="blue"><a href="" th:text="${actor.name}"
+                                                                  th:href="@{'/person/'+${actor.id}}">Actor name</a></span>
                                             <div class="lib-header-seperator"></div>
                                         </div>
                                         <div class="lib-row lib-desc pl-5" th:text="${actor.role}">Actor role</div>
@@ -113,7 +131,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <!--And it ends here-->
                 </div>
             </div>

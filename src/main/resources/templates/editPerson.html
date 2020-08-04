@@ -15,7 +15,7 @@
             crossorigin="anonymous"></script>
     <meta charset="UTF-8">
 
-    <title th:text="${movie.name}">Movie page</title>
+    <title th:text="${person.name}">Person page</title>
 </head>
 <body>
 <div class="container">
@@ -44,44 +44,20 @@
         <!--end of col-->
     </div>
 </div>
-<form action="#" method="post" th:action="@{/movie}" th:object="${movie}" enctype="multipart/form-data">
-    <input type="hidden" id="id" th:value="${movie.id}" th:field="*{id}">
+<form action="#" method="post" th:action="@{/person}" th:object="${person}" enctype="multipart/form-data">
+    <input type="hidden" id="id" th:value="${person.id}" th:field="*{id}">
     <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Movie Name</label>
+        <label for="name" class="col-sm-2 col-form-label">Person Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" th:value="${movie.name}" th:field="*{name}">
+            <input type="text" class="form-control" id="name" th:value="${person.name}" th:field="*{name}">
         </div>
     </div>
     <div class="form-group row">
-        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <label for="poster" class="col-sm-2 col-form-label">Photo</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="description" th:value="${movie.description}"
-                   th:field="*{description}">
+            <input type="file" class="form-control" id="poster" th:field="*{photo}" th:value="${person.photo}">
         </div>
     </div>
-    <div class="form-group row">
-        <label for="poster" class="col-sm-2 col-form-label">Poster</label>
-        <div class="col-sm-10">
-            <input type="file" class="form-control" id="poster" th:field="*{poster}" th:value="${movie.poster}">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="director" class="col-sm-2 col-form-label">Director</label>
-        <div class="col-sm-10">
-            <select th:field="*{director}" id="director">
-                <option th:each="person: ${people}" th:value="${person.id}" th:text="${person.name}"></option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="actors" class="col-sm-2 col-form-label">Actors</label>
-        <div class="col-sm-10">
-            <select multiple class="form-control" id="actors" th:field="*{actors}">
-                <option th:each="actor: ${people}" th:text="${actor.name}" th:value="${actor.id}">1</option>
-            </select>
-        </div>
-    </div>
-
     <button class="btn btn-lg btn-primary" type="submit">Submit</button>
 </form>
 

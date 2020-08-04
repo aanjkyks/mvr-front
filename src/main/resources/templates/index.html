@@ -50,26 +50,32 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h3>Movie List</h3>
+                <a class="btn btn-lg btn-primary" href="/movie/create">Create Movie</a>
                 <div class="row row-margin-bottom mt-5">
                     <!--This is an object you want-->
-                    <div th:each="movie: ${movies}">
-                        <div class="col-md-6 no-padding lib-item" data-category="view">
-                            <div class="lib-panel">
-                                <div class="row box-shadow w-100">
-                                    <div class="col-md-6 image-row">
-                                        <a href=""th:href="@{'/movie/'+${movie.id}}">
-                                            <img th:src="@{'data:image/png;base64, '+${movie.poster}}">
-                                        </a>
+                    <div class="col-md-6 no-padding lib-item" data-category="view" th:each="movie: ${movies}">
+                        <div class="lib-panel">
+                            <div class="row box-shadow w-100">
+                                <div class="col-md-6 image-row">
+                                    <a href="" th:href="@{'/movie/'+${movie.id}}">
+                                        <img th:src="@{'data:image/png;base64, '+${movie.poster}}">
+                                    </a>
+                                </div>
+                                <div class="col-md-6 card-text">
+                                    <div class="lib-row lib-header text-left pl-5">
+                                        <span class="blue"><a href="" th:text="${movie.name}"
+                                                              th:href="@{'/movie/'+${movie.id}}">Movie name</a></span>
+                                        <div class="lib-header-seperator"></div>
                                     </div>
-                                    <div class="col-md-6 card-text">
-                                        <div class="lib-row lib-header text-left pl-5">
-                                            <span class="blue"><a href="" th:text="${movie.name}" th:href="@{'/movie/'+${movie.id}}">Movie name</a></span>
-                                            <div class="lib-header-seperator"></div>
-                                        </div>
-                                        <div class="lib-row lib-desc pl-5" th:text="${movie.description}">Movie description</div>
-                                        <div class="lib-row lib-desc pl-5" th:text="@{'🌟 Rating: ' + ${movie.avgRating} + '/10'}">Rating</div>
-                                        <a href="" th:text="@{'Director: ' + ${movie.director.name}}">Clickable Movie Director, please make me a button</a>
+                                    <div class="lib-row lib-desc pl-5" th:text="${movie.description}">Movie
+                                        description
                                     </div>
+                                    <div class="lib-row lib-desc pl-5"
+                                         th:text="@{'🌟 Rating: ' + ${movie.avgRating} + '/10'}">Rating
+                                    </div>
+                                    <a href="" th:text="@{'Director: ' + ${movie.director.name}}"
+                                       th:href="@{'/person/' + ${movie.director.id}}">Clickable Movie Director, please
+                                        make me a button</a>
                                 </div>
                             </div>
                         </div>

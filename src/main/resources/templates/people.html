@@ -14,8 +14,7 @@
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-
-    <title th:text="${movie.name}">Movie page</title>
+    <title>People</title>
 </head>
 <body>
 <div class="container">
@@ -44,48 +43,39 @@
         <!--end of col-->
     </div>
 </div>
-<form action="#" method="post" th:action="@{/movie}" th:object="${movie}" enctype="multipart/form-data">
-    <input type="hidden" id="id" th:value="${movie.id}" th:field="*{id}">
-    <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Movie Name</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" th:value="${movie.name}" th:field="*{name}">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="description" class="col-sm-2 col-form-label">Description</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="description" th:value="${movie.description}"
-                   th:field="*{description}">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="poster" class="col-sm-2 col-form-label">Poster</label>
-        <div class="col-sm-10">
-            <input type="file" class="form-control" id="poster" th:field="*{poster}" th:value="${movie.poster}">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="director" class="col-sm-2 col-form-label">Director</label>
-        <div class="col-sm-10">
-            <select th:field="*{director}" id="director">
-                <option th:each="person: ${people}" th:value="${person.id}" th:text="${person.name}"></option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="actors" class="col-sm-2 col-form-label">Actors</label>
-        <div class="col-sm-10">
-            <select multiple class="form-control" id="actors" th:field="*{actors}">
-                <option th:each="actor: ${people}" th:text="${actor.name}" th:value="${actor.id}">1</option>
-            </select>
-        </div>
-    </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">Submit</button>
-</form>
 
 
-
+<section class="vantagens">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>Person List</h3>
+                <a class="btn btn-lg btn-primary" href="/person/create">Create Person</a>
+                <div class="row row-margin-bottom mt-5">
+                    <!--This is an object you want-->
+                    <div class="col-md-6 no-padding lib-item" data-category="view" th:each="person: ${people}">
+                        <div class="lib-panel">
+                            <div class="row box-shadow w-100">
+                                <div class="col-md-6 image-row">
+                                    <a href="" th:href="@{'/person/'+${person.id}}">
+                                        <img th:src="@{'data:image/png;base64, '+${person.photo}}">
+                                    </a>
+                                </div>
+                                <div class="col-md-6 card-text">
+                                    <div class="lib-row lib-header text-left pl-5">
+                                        <span class="blue"><a href="" th:text="${person.name}"
+                                                              th:href="@{'/person/'+${person.id}}">Movie name</a></span>
+                                        <div class="lib-header-seperator"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--And it ends here-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

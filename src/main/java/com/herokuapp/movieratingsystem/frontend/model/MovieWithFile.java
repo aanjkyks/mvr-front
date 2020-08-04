@@ -1,9 +1,9 @@
-package com.herokuapp.movieratingsystem.frontend;
+package com.herokuapp.movieratingsystem.frontend.model;
 
 import com.herokuapp.movieratingsystem.frontend.integration.model.MovieDto;
-import com.herokuapp.movieratingsystem.frontend.integration.model.PersonDto;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -15,8 +15,8 @@ public class MovieWithFile {
     private String description;
     private String name;
     private MultipartFile poster;
-    private PersonDto director;
-    private List<PersonDto> actors;
+    private Long director;
+    private List<Long> actors = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -72,20 +72,20 @@ public class MovieWithFile {
         return this;
     }
 
-    public PersonDto getDirector() {
+    public Long getDirector() {
         return director;
     }
 
-    public MovieWithFile setDirector(PersonDto director) {
+    public MovieWithFile setDirector(Long director) {
         this.director = director;
         return this;
     }
 
-    public List<PersonDto> getActors() {
+    public List<Long> getActors() {
         return actors;
     }
 
-    public MovieWithFile setActors(List<PersonDto> actors) {
+    public MovieWithFile setActors(List<Long> actors) {
         this.actors = actors;
         return this;
     }
